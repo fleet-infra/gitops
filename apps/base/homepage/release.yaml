@@ -26,9 +26,9 @@ spec:
 
     service:
       main:
-        type: LoadBalancer
-        loadBalancerClass: tailscale
+        type: ClusterIP
         annotations:
+          tailscale.com/expose: "true"
           tailscale.com/hostname: "homepage"
         ports:
           http:
