@@ -23,6 +23,7 @@ spec:
 
     env:
       TZ: Europe/Paris
+      HOMEPAGE_ALLOWED_HOSTS: homepage.tail994e59.ts.net
 
     service:
       main:
