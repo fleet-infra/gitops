@@ -1,0 +1,15 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: flux-system
+spec:
+  values:
+    ports:
+      web:
+        hostPort: 80
+      websecure:
+        hostPort: 443
+    service:
+      type: ClusterIP
