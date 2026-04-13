@@ -1,0 +1,9 @@
+[tools]
+flux2 = "latest"
+k3d = "latest"
+kubeconform = "latest"
+kubectl = "latest"
+kustomize = "latest"
+sops = "latest"
+yq = "latest"
+age = "latest"
