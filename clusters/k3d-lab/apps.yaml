@@ -15,3 +15,7 @@ spec:
     name: flux-system
   path: ./apps/k3d-lab
   prune: true
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age

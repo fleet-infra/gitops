@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ../base
   - local-path-provisioner.yaml
+  - tailscale-secret.yaml
 
 patches:
   - path: traefik-patch.yaml
