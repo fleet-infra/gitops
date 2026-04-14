@@ -83,8 +83,8 @@ spec:
                 href: http://flux.${tailnet_domain}
                 siteMonitor: http://flux.${tailnet_domain}
         - Network & Security:
-            - Traefik:
-                icon: traefik
+            - Traefik Proxy:
+                icon: traefik-proxy
                 href: https://traefik.${tailnet_domain}
                 siteMonitor: https://traefik.${tailnet_domain}
             - Tailscale:

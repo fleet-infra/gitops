@@ -2,7 +2,9 @@
 
 GitOps homelab infrastructure managed by [Flux CD](https://fluxcd.io).
 
-## Architecture
+## Architecture & GitOps Flow
+
+This repository follows the Base/Overlay pattern to manage multiple environments while reusing common configurations.
 
 ```mermaid
 flowchart LR
@@ -40,9 +42,49 @@ flowchart LR
   A_PROD -.->|"Kustomize"| A_BASE
 ```
 
+## Hybrid access strategy
+
+We use a dual-layer security model to balance accessibility and high-level protection.
+
+```mermaid
+flowchart TD
+  subgraph Users["User Access"]
+    U_Public["Public / Local Network"]
+    U_Admin["Admin / Private Devices (Tailnet)"]
+  end
+
+  subgraph Cluster["Kubernetes Cluster"]
+    direction TB
+
+    subgraph Controllers["Ingress Controllers"]
+      TR["Traefik Proxy"]
+      TSO["Tailscale Operator"]
+    end
+
+    subgraph Apps["Applications"]
+      A_PUB["Public Services"]
+      A_PRIV["Private Services"]
+    end
+  end
+
+  U_Public -->|Port 80/443| TR
+  TR -->|Standard Routing| A_PUB
+
+  U_Admin -->|Secure Tunnel| TSO
+  TSO -->|Direct Tunneling| A_PRIV
+
+  TSO -.->|Admin UI Access| TR
+```
+
+The two pillars:
+
+1. Public/Local Path (Traefik Proxy): Standard access for shared services. Traefik acts as the front-door for all non-sensitive traffic.
+
+2. Private Path (Tailscale): Zero Trust access for sensitive services and infrastructure management. For security reasons, the Traefik Proxy Dashboard (the admin interface) is not exposed publicly. It is strictly routed through a Tailscale tunnel, separating the "worker" (traffic routing) from the "manager" (UI dashboard).
+
 ## Quickstart (Local Dev)
 
-We use `k3d` for local development, disabling default k3s components to let Flux manage the stack.
+We use [`k3d`](https://k3d.io) for local development, disabling default k3s components to let Flux manage the stack.
 
 ### 1. Create the Cluster
 
