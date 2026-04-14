@@ -20,4 +20,5 @@ spec:
       enabled: true
       size: 2Gi
     env:
-      SIGNUPS_ALLOWED: "true"
+      - name: SIGNUPS_ALLOWED
+        value: "true"

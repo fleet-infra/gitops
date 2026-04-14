@@ -6,7 +6,8 @@ metadata:
 spec:
   values:
     env:
-      DOMAIN: "https://vaultwarden-dev.${tailnet_domain}"
+      - name: DOMAIN
+        value: "https://vaultwarden-dev.${tailnet_domain}"
 
     ingress:
       enabled: true
