@@ -71,10 +71,10 @@ spec:
                 icon: forgejo
                 href: https://code.${tailnet_domain}
                 siteMonitor: https://code.${tailnet_domain}
-            - Flux UI:
-                icon: flux-cd
-                href: http://flux.${tailnet_domain}
-                siteMonitor: http://flux.${tailnet_domain}
+            - Weave GitOps:
+                icon: weave-gitops
+                href: https://gitops.${tailnet_domain}
+                siteMonitor: https://gitops.${tailnet_domain}
         - Network & Security:
             - Traefik Proxy:
                 icon: traefik-proxy
