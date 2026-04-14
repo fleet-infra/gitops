@@ -15,6 +15,11 @@ spec:
           paths:
             - path: /
               pathType: Prefix
+              backend:
+                service:
+                  name: weave-gitops
+                  port:
+                    number: 9001
       tls:
         - hosts:
             - "gitops-dev.${tailnet_domain}"
