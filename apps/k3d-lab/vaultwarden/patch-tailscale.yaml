@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vaultwarden-tailscale
+  namespace: vaultwarden
+  annotations:
+    tailscale.com/hostname: "vaultwarden-dev"
+spec:
+  ingressClassName: tailscale
+  rules:
+    - host: "vaultwarden-dev.${tailnet_domain}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: vaultwarden
+                port:
+                  number: 80

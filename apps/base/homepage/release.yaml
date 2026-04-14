@@ -90,9 +90,6 @@ spec:
             - Tailscale:
                 icon: tailscale
                 href: https://login.tailscale.com/admin/machines
-            - AdGuard Home:
-                icon: adguard-home
-                href: https://dns.${tailnet_domain}
             - Vaultwarden:
                 icon: vaultwarden
                 href: https://vault.${tailnet_domain}
