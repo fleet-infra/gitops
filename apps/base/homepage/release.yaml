@@ -4,7 +4,7 @@ metadata:
   name: homepage
   namespace: homepage
 spec:
-  interval: 30m
+  interval: 1h
   chart:
     spec:
       chart: homepage
@@ -13,30 +13,77 @@ spec:
         kind: HelmRepository
         name: homepage
         namespace: flux-system
-  install:
-    createNamespace: false
   values:
     image:
       repository: ghcr.io/gethomepage/homepage
       tag: v1.2.0
-      pullPolicy: IfNotPresent
 
-    env:
-      TZ: Europe/Paris
-      HOMEPAGE_ALLOWED_HOSTS: homepage.tail994e59.ts.net
+    controller:
+      strategy: RollingUpdate
+
+    enableRbac: true
+    serviceAccount:
+      create: true
+    kubernetes:
+      mode: cluster
 
     service:
       main:
-        type: ClusterIP
-        annotations:
-          tailscale.com/expose: "true"
-          tailscale.com/hostname: "homepage"
-          tailscale.com/tls-certificate-name: "homepage-tls"
         ports:
           http:
-            port: 80
-            targetPort: 3000
+            port: 3000
 
     ingress:
       main:
         enabled: false
+
+    config:
+      settingsString: |
+        title: "Dashboard"
+        headerStyle: boxed
+
+      bookmarks:
+        - Developer:
+            - GitHub:
+                - abbr: GH
+                  href: https://github.com/
+
+      services:
+        - My First Group:
+            - My First Service:
+                href: http://localhost/
+                description: Homepage is awesome
+        - My Second Group:
+            - My Second Service:
+                href: http://localhost/
+                description: Homepage is the best
+        - My Third Group:
+            - My Third Service:
+                href: http://localhost/
+                description: Homepage is 😎
+
+      widgets:
+        - resources:
+            backend: resources
+            expanded: true
+            cpu: true
+            memory: true
+        - search:
+            provider: duckduckgo
+            target: _blank
+        - kubernetes:
+            cluster:
+              show: true
+              cpu: true
+              memory: true
+              showLabel: true
+              label: "cluster"
+            nodes:
+              show: true
+              cpu: true
+              memory: true
+              showLabel: true
+
+    env:
+      - name: TZ
+        value: "Europe/Paris"

@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: homepage
+  namespace: homepage
+spec:
+  values:
+    env:
+      - name: HOMEPAGE_ALLOWED_HOSTS
+        value: "homepage-dev.${tailnet_domain}"
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "tailscale"
+        annotations:
+          tailscale.com/hostname: "homepage-dev"
+        hosts:
+          - host: "homepage-dev.${tailnet_domain}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "homepage-dev.${tailnet_domain}"

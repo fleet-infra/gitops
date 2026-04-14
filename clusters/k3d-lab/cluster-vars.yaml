@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-vars
+  namespace: flux-system
+  labels:
+    reconcile.fluxcd.io/watch: "Enabled"
+data:
+  tailnet_domain: "tail994e59.ts.net"
