@@ -17,4 +17,9 @@ spec:
     adminUser:
       create: true
       username: admin
-      passwordSecret: cluster-user-auth
+
+  valuesFrom:
+    - kind: Secret
+      name: cluster-user-auth
+      valuesKey: password
+      targetPath: adminUser.passwordHash
