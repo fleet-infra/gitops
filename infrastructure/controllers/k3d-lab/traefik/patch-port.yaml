@@ -6,6 +6,8 @@ metadata:
 spec:
   values:
     ports:
+      traefik:
+        expose: true
       web:
         hostPort: 80
       websecure:
