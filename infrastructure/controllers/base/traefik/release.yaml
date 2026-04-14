@@ -8,12 +8,12 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: "32.1.0"
+      version: "39.0.7"
       sourceRef:
         kind: HelmRepository
         name: traefik
   install:
-    createNamespace: true
+    createNamespace: false
   targetNamespace: traefik-system
   values:
     deployment:
