@@ -16,7 +16,7 @@ spec:
   values:
     image:
       repository: ghcr.io/gethomepage/homepage
-      tag: v1.2.0
+      tag: v1.12.3
 
     controller:
       strategy: RollingUpdate
@@ -43,10 +43,24 @@ spec:
         headerStyle: boxed
 
       bookmarks:
-        - Developer:
+        - Dev:
             - GitHub:
-                - abbr: GH
-                  href: https://github.com/
+                - icon: github
+                  href: https://github.com
+            - GitLab:
+                - icon: gitlab
+                  href: https://gitlab.com
+        - Social:
+            - Reddit:
+                - icon: reddit
+                  href: https://reddit.com
+        - Entertainment:
+            - YouTube:
+                - icon: youtube
+                  href: https://youtube.com
+            - Twitch:
+                - icon: twitch
+                  href: https://twitch.tv
 
       services:
         - My First Group:
@@ -63,26 +77,29 @@ spec:
                 description: Homepage is 😎
 
       widgets:
+        - greeting:
+            text_size: xl
+            text: Welcome back
+        - datetime:
+            text_size: md
+            format:
+              timeStyle: short
+              hourCycle: h23
         - resources:
-            backend: resources
-            expanded: true
             cpu: true
             memory: true
+        - openmeteo:
+            label: Rouen
+            latitude: 49.433331
+            longitude: 1.08333
+            timezone: Europe/Paris
+            units: metric
+            cache: 5
+            format:
+              maximumFractionDigits: 1
         - search:
             provider: duckduckgo
             target: _blank
-        - kubernetes:
-            cluster:
-              show: true
-              cpu: true
-              memory: true
-              showLabel: true
-              label: "cluster"
-            nodes:
-              show: true
-              cpu: true
-              memory: true
-              showLabel: true
 
     env:
       - name: TZ
