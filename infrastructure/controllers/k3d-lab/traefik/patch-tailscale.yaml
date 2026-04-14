@@ -29,7 +29,7 @@ spec:
                       service:
                         name: traefik-system-traefik
                         port:
-                          number: 9000
+                          number: 8080
           tls:
             - hosts:
                 - "traefik-dev.${tailnet_domain}"
