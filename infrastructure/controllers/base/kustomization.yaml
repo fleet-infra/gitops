@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - traefik
   - tailscale
+  - cert-manager
