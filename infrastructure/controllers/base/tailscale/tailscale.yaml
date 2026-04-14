@@ -23,7 +23,7 @@ spec:
         kind: HelmRepository
         name: tailscale
   install:
-    createNamespace: true
+    createNamespace: false
   targetNamespace: tailscale
   values:
     oauth:
