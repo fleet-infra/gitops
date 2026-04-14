@@ -1,14 +1,12 @@
 # fleet-infra
 
-This repository contains the Infrastructure as Code and GitOps configuration for the homelab, fully managed by Flux CD.
+GitOps homelab infrastructure managed by [Flux CD](https://fluxcd.io).
 
-## Development Setup
+## Quickstart (Local Dev)
 
-To test and develop the infrastructure locally, we use `k3d`. The local cluster is created with the default k3s components disabled (Traefik, ServiceLB, Local Storage) because we manage our own stack (Traefik, Tailscale Operator, and Rancher Local Path Provisioner) via Flux.
+We use `k3d` for local development, disabling default k3s components to let Flux manage the stack.
 
-### 1. Create the Local Cluster
-
-Run the following command to provision the local `fleet-infra` cluster and map the HTTP/HTTPS ports to your host:
+### 1. Create the Cluster
 
 ```bash
 k3d cluster create fleet-infra \
@@ -21,11 +19,9 @@ k3d cluster create fleet-infra \
   --agents 2
 ```
 
-### 2. Inject the SOPS Age Key (Secrets Decryption)
+### 2. Inject Secrets Decryption Key
 
-Before Flux can successfully deploy the infrastructure, it needs the private Age key to decrypt SOPS-encrypted secrets (such as the Tailscale OAuth credentials).
-
-Assuming you have your `age.agekey` file at the root of the repository, create the `flux-system` namespace and inject the secret:
+Flux needs your Age key to decrypt SOPS-encrypted secrets. Place your `age.agekey` file at the root of the project and run:
 
 ```bash
 kubectl create namespace flux-system
@@ -34,18 +30,14 @@ kubectl create secret generic sops-age \
   --from-file=age.agekey=age.agekey
 ```
 
-### 3. Bootstrap Flux CD
+### 3. Bootstrap Flux
 
-Before running the bootstrap command, export your GitHub credentials. This allows Flux to authenticate with the GitHub API and automatically configure the necessary deploy keys for the repository:
+Export your GitHub credentials and link the cluster to this repository:
 
 ```bash
 export GITHUB_USER="<your-github-username>"
 export GITHUB_TOKEN="<your-personal-access-token>"
-```
 
-Now, link the cluster to this Git repository so Flux can start the reconciliation loop. Adjust the repository name and branch if necessary:
-
-```bash
 flux bootstrap github \
   --owner=$GITHUB_USER \
   --repository=fleet-infra \
@@ -54,17 +46,12 @@ flux bootstrap github \
   --personal
 ```
 
-### 4. Verify the Deployment
+### 4. Verify Deployment
 
-You can monitor the progress of the GitOps synchronization with:
+Watch the GitOps synchronization progress:
 
 ```bash
 flux get kustomizations --watch
 ```
 
-Once all Kustomizations are `Ready: True`, your base infrastructure is operational. You can verify the Tailscale operator and Homepage deployment:
-
-```bash
-kubectl get pods -A
-flux get helmreleases -A
-```
+Once all Kustomizations are `Ready: True`, your cluster is fully operational! Check your pods with `kubectl get pods -A`.
