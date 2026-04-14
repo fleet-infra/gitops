@@ -1,20 +1,20 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
 metadata:
-  name: vaultwarden-tailscale
+  name: vaultwarden
   namespace: vaultwarden
-  annotations:
-    tailscale.com/hostname: "vaultwarden-dev"
 spec:
-  ingressClassName: tailscale
-  rules:
-    - host: "vaultwarden-dev.${tailnet_domain}"
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: vaultwarden
-                port:
-                  number: 80
+  values:
+    ingress:
+      enabled: true
+      className: "tailscale"
+      annotations:
+        tailscale.com/hostname: "vaultwarden-dev"
+      hosts:
+        - host: "vaultwarden-dev.${tailnet_domain}"
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - "vaultwarden-dev.${tailnet_domain}"
