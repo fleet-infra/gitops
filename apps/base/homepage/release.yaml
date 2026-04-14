@@ -15,11 +15,8 @@ spec:
         namespace: flux-system
   values:
     image:
-      repository: ghcr.io/gethomepage/homepage
       tag: v1.12.3
-
-    controller:
-      strategy: RollingUpdate
+    #   repository: ghcr.io/gethomepage/homepage
 
     enableRbac: true
     serviceAccount:
@@ -27,15 +24,11 @@ spec:
     kubernetes:
       mode: cluster
 
-    service:
-      main:
-        ports:
-          http:
-            port: 3000
-
-    ingress:
-      main:
-        enabled: false
+    # service:
+    #   main:
+    #     ports:
+    #       http:
+    #         port: 3000
 
     config:
       settingsString: |
@@ -93,6 +86,7 @@ spec:
             - Vaultwarden:
                 icon: vaultwarden
                 href: https://vault.${tailnet_domain}
+                siteMonitor: https://vault.${tailnet_domain}
         - Monitoring:
             - Prometheus:
                 icon: prometheus
@@ -101,34 +95,42 @@ spec:
             - Uptime Kuma:
                 icon: uptime-kuma
                 href: https://status.${tailnet_domain}
+                siteMonitor: https://status.${tailnet_domain}
         - Media & Entertainment:
             - Jellyfin:
                 icon: jellyfin
                 href: https://jellyfin.${tailnet_domain}
+                siteMonitor: https://jellyfin.${tailnet_domain}
             - Immich:
                 icon: immich
-                href: https://photos.${tailnet_domain}
+                href: https://photos.${public_domain}
+                siteMonitor: https://photos.${public_domain}
         - Apps & Cloud:
             - Seafile:
                 icon: seafile
-                href: https://cloud.${tailnet_domain}
-                siteMonitor: https://cloud.${tailnet_domain}
+                href: https://cloud.${public_domain}
+                siteMonitor: https://cloud.${public_domain}
             - Paperless-ngx:
                 icon: paperless-ngx
                 href: https://paperless.${tailnet_domain}
+                siteMonitor: https://paperless.${tailnet_domain}
             - Vikunja:
                 icon: vikunja
                 href: https://tasks.${tailnet_domain}
+                siteMonitor: https://tasks.${tailnet_domain}
             - Mealie:
                 icon: mealie
                 href: https://recipes.${tailnet_domain}
+                siteMonitor: https://recipes.${tailnet_domain}
         - Tools & Utilities:
             - Stirling-PDF:
                 icon: stirling-pdf
                 href: https://pdf.${tailnet_domain}
+                siteMonitor: https://pdf.${tailnet_domain}
             - Excalidraw:
                 icon: excalidraw
                 href: https://draw.${tailnet_domain}
+                siteMonitor: https://draw.${tailnet_domain}
 
       widgets:
         - greeting:
@@ -146,7 +148,3 @@ spec:
             cache: 5
             format:
               maximumFractionDigits: 1
-
-    env:
-      - name: TZ
-        value: "Europe/Paris"
