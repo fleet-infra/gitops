@@ -27,7 +27,7 @@ spec:
                     pathType: Prefix
                     backend:
                       service:
-                        name: traefik
+                        name: traefik-system-traefik
                         port:
                           number: 9000
           tls:
