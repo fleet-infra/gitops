@@ -90,16 +90,48 @@ spec:
             - Tailscale:
                 icon: tailscale
                 href: https://login.tailscale.com/admin/machines
+            - AdGuard Home:
+                icon: adguard-home
+                href: https://dns.${tailnet_domain}
+            - Vaultwarden:
+                icon: vaultwarden
+                href: https://vault.${tailnet_domain}
         - Monitoring:
             - Prometheus:
                 icon: prometheus
                 href: http://localhost
                 siteMonitor: https://localhost
+            - Uptime Kuma:
+                icon: uptime-kuma
+                href: https://status.${tailnet_domain}
+        - Media & Entertainment:
+            - Jellyfin:
+                icon: jellyfin
+                href: https://jellyfin.${tailnet_domain}
+            - Immich:
+                icon: immich
+                href: https://photos.${tailnet_domain}
         - Apps & Cloud:
             - Seafile:
                 icon: seafile
                 href: https://cloud.${tailnet_domain}
                 siteMonitor: https://cloud.${tailnet_domain}
+            - Paperless-ngx:
+                icon: paperless-ngx
+                href: https://paperless.${tailnet_domain}
+            - Vikunja:
+                icon: vikunja
+                href: https://tasks.${tailnet_domain}
+            - Mealie:
+                icon: mealie
+                href: https://recipes.${tailnet_domain}
+        - Tools & Utilities:
+            - Stirling-PDF:
+                icon: stirling-pdf
+                href: https://pdf.${tailnet_domain}
+            - Excalidraw:
+                icon: excalidraw
+                href: https://draw.${tailnet_domain}
 
       widgets:
         - greeting:

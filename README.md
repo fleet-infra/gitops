@@ -82,7 +82,7 @@ The two pillars:
 
 2. Private Path (Tailscale): Zero Trust access for sensitive services and infrastructure management. For security reasons, the Traefik Proxy Dashboard (the admin interface) is not exposed publicly. It is strictly routed through a Tailscale tunnel, separating the "worker" (traffic routing) from the "manager" (UI dashboard).
 
-## Quickstart (Local Dev)
+## Quickstart
 
 We use [`k3d`](https://k3d.io) for local development, disabling default k3s components to let Flux manage the stack.
 
