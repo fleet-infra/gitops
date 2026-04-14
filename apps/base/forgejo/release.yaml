@@ -20,10 +20,21 @@ spec:
     persistence:
       enabled: true
       size: 10Gi
-    gitea:
-      config:
-        database:
-          DB_TYPE: sqlite3
-        server:
-          DOMAIN: forgejo.k3d.localhost
-          ROOT_URL: https://forgejo.k3d.localhost
+
+    config:
+      database:
+        DB_TYPE: sqlite3
+      server:
+        DOMAIN: forgejo.k3d.localhost
+        ROOT_URL: https://forgejo.k3d.localhost
+
+    ingress:
+      enabled: true
+      className: traefik
+      annotations:
+        cert-manager.io/cluster-issuer: selfsigned-issuer
+      hosts:
+        - host: forgejo.k3d.localhost
+          paths:
+            - path: /
+              pathType: Prefix
