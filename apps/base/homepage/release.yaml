@@ -39,8 +39,18 @@ spec:
 
     config:
       settingsString: |
-        title: "Dashboard"
-        headerStyle: boxed
+        title: Pierre's cluster
+        headerStyle: clean
+        theme: dark
+        color: slate
+        target: _blank
+        disableIndexing: true
+        background:
+          image: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
+          blur: sm
+          saturate: 50
+          brightness: 50
+          opacity: 50
 
       bookmarks:
         - Dev:
@@ -78,13 +88,8 @@ spec:
 
       widgets:
         - greeting:
-            text_size: xl
-            text: Welcome back
-        - datetime:
-            text_size: md
-            format:
-              timeStyle: short
-              hourCycle: h23
+            text_size: 2xl
+            text: Welcome to Pierre's cluster
         - resources:
             cpu: true
             memory: true
