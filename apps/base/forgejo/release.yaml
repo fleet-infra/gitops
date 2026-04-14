@@ -18,6 +18,10 @@ spec:
     createNamespace: false
   values:
     gitea:
+      persistence:
+        enabled: true
+        size: 10Gi
+        storageClass: "local-path"
       config:
         database:
           DB_TYPE: sqlite3
