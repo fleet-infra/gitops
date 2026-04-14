@@ -78,11 +78,11 @@ spec:
                 icon: forgejo
                 href: https://code.${tailnet_domain}
                 siteMonitor: https://code.${tailnet_domain}
-            - FluxCD:
+            - Flux UI:
                 icon: flux-cd
-                href: http://localhost
-                siteMonitor: https://localhost
-        - Réseau & Sécurité:
+                href: http://flux.${tailnet_domain}
+                siteMonitor: http://flux.${tailnet_domain}
+        - Network & Security:
             - Traefik:
                 icon: traefik
                 href: https://traefik.${tailnet_domain}

@@ -7,3 +7,4 @@ metadata:
     reconcile.fluxcd.io/watch: "Enabled"
 data:
   tailnet_domain: "tail994e59.ts.net"
+  public_domain: "houlliere.com"
