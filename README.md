@@ -20,7 +20,7 @@ flowchart LR
   end
 
   subgraph Apps["Applications (Workloads)"]
-    A_BASE["base/<br/>(Homepage)"]
+    A_BASE["base/"]
     A_K3D["k3d-lab/"]
     A_PROD["production/"]
   end
