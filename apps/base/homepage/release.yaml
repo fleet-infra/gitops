@@ -73,18 +73,33 @@ spec:
                   href: https://twitch.tv
 
       services:
-        - My First Group:
-            - My First Service:
-                href: http://localhost/
-                description: Homepage is awesome
-        - My Second Group:
-            - My Second Service:
-                href: http://localhost/
-                description: Homepage is the best
-        - My Third Group:
-            - My Third Service:
-                href: http://localhost/
-                description: Homepage is 😎
+        - Infrastructure:
+            - Forgejo:
+                icon: forgejo
+                href: https://code.${tailnet_domain}
+                siteMonitor: https://code.${tailnet_domain}
+            - FluxCD:
+                icon: flux-cd
+                href: http://localhost
+                siteMonitor: https://localhost
+        - Réseau & Sécurité:
+            - Traefik:
+                icon: traefik
+                href: https://traefik.${tailnet_domain}
+                siteMonitor: https://traefik.${tailnet_domain}
+            - Tailscale:
+                icon: tailscale
+                href: https://login.tailscale.com/admin/machines
+        - Monitoring:
+            - Prometheus:
+                icon: prometheus
+                href: http://localhost
+                siteMonitor: https://localhost
+        - Apps & Cloud:
+            - Seafile:
+                icon: seafile
+                href: https://cloud.${tailnet_domain}
+                siteMonitor: https://cloud.${tailnet_domain}
 
       widgets:
         - greeting:
@@ -102,9 +117,6 @@ spec:
             cache: 5
             format:
               maximumFractionDigits: 1
-        - search:
-            provider: duckduckgo
-            target: _blank
 
     env:
       - name: TZ
