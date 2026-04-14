@@ -5,6 +5,8 @@ metadata:
   namespace: flux-system
 spec:
   values:
+    api:
+      insecure: true
     ports:
       traefik:
         expose:
