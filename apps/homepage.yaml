@@ -63,7 +63,7 @@ spec:
                     icon: forgejo
                     href: http://localhost
                 - ArgoCD:
-                    icon: argocd
+                    icon: argo-cd
                     href: http://localhost
             - Network & Security:
                 - Tailscale:
