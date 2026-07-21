@@ -1,0 +1,125 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: homepage
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: homepage
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://jameswynn.github.io/helm-charts
+    targetRevision: "*"
+    chart: homepage
+    helm:
+      values: |
+        config:
+          settings:
+            title: Pierre's cluster
+            headerStyle: clean
+            theme: dark
+            color: slate
+            target: _blank
+            disableIndexing: true
+            background:
+              image: https://images.unsplash.com/photo-1502790671504-542ad42d5189?auto=format&fit=crop&w=2560&q=80
+              blur: sm
+              saturate: 50
+              brightness: 50
+              opacity: 50
+
+          bookmarks:
+            - Dev:
+                - GitHub:
+                    - icon: github
+                      href: https://github.com
+                - GitLab:
+                    - icon: gitlab
+                      href: https://gitlab.com
+            - Social:
+                - Reddit:
+                    - icon: reddit
+                      href: https://reddit.com
+            - Entertainment:
+                - YouTube:
+                    - icon: youtube
+                      href: https://youtube.com
+                - Twitch:
+                    - icon: twitch
+                      href: https://twitch.tv
+
+          services:
+            - Infrastructure:
+                - Forgejo:
+                    icon: forgejo
+                    href: http://localhost
+                - ArgoCD:
+                    icon: argocd
+                    href: http://localhost
+            - Network & Security:
+                - Tailscale:
+                    icon: tailscale
+                    href: https://login.tailscale.com/admin/machines
+                - Vaultwarden:
+                    icon: vaultwarden
+                    href: http://localhost
+            - Monitoring:
+                - Prometheus:
+                    icon: prometheus
+                    href: http://localhost
+                - Uptime Kuma:
+                    icon: uptime-kuma
+                    href: http://localhost
+            - Media & Entertainment:
+                - Jellyfin:
+                    icon: jellyfin
+                    href: http://localhost
+                - Immich:
+                    icon: immich
+                    href: http://localhost
+            - Apps & Cloud:
+                - Seafile:
+                    icon: seafile
+                    href: http://localhost
+                - Paperless-ngx:
+                    icon: paperless-ngx
+                    href: http://localhost
+                - Vikunja:
+                    icon: vikunja
+                    href: http://localhost
+                - Mealie:
+                    icon: mealie
+                    href: http://localhost
+            - Tools & Utilities:
+                - Stirling-PDF:
+                    icon: stirling-pdf
+                    href: http://localhost
+                - Excalidraw:
+                    icon: excalidraw
+                    href: http://localhost
+
+          widgets:
+            - greeting:
+                text_size: 2xl
+                text: Welcome to Pierre's cluster
+            - resources:
+                cpu: true
+                memory: true
+            - openmeteo:
+                label: Rouen
+                latitude: 49.433331
+                longitude: 1.08333
+                timezone: Europe/Paris
+                units: metric
+                cache: 5
+                format:
+                  maximumFractionDigits: 1

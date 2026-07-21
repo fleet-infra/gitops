@@ -1,0 +1,11 @@
+config:
+  repoURL: https://github.com/fleet-infra/gitops.git
+  targetRevision: main
+
+bootstraps:
+  - name: system
+    wave: "1"
+  - name: data
+    wave: "2"
+  - name: apps
+    wave: "3"

@@ -1,0 +1,7 @@
+apiVersion: v2
+name: homelab-bootstrap
+description: Root application (App of Apps) that bootstraps the cluster
+type: application
+version: 1.0.0
+appVersion: "1.0"
+icon: https://raw.githubusercontent.com/argoproj/argo-cd/master/docs/assets/logo.png

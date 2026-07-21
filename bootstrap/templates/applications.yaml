@@ -1,0 +1,27 @@
+{{- range .Values.bootstraps }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .name }}-apps
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: {{ .wave | quote }}
+spec:
+  project: default
+  source:
+    repoURL: {{ $.Values.config.repoURL }}
+    targetRevision: {{ $.Values.config.targetRevision }}
+    path: {{ .name }}
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+{{ end -}}
