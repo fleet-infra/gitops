@@ -12,6 +12,7 @@ spec:
     namespace: homepage
   syncPolicy:
     automated:
+      enabled: true
       prune: true
       selfHeal: true
     syncOptions:
